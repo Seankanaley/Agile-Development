@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @shift.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @shift.end_time %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @shift.location %>
+</p>
+
+<p>
+  <strong>Employeeid:</strong>
+  <%= @shift.employeeID %>
+</p>
+
+<p>
+  <strong>Confirmed:</strong>
+  <%= @shift.confirmed %>
+</p>
+
+<%= link_to 'Edit', edit_shift_path(@shift) %> |
+
+<% if current_user.try(:hospital_admin) %>
+<%= link_to 'Back', hosp_admin_sched_path %>
+<% end %>
+
+<% if current_user.try(:employee_manager) %>
+  <%= link_to 'Back', manager_sched_path %>
+<% end %>

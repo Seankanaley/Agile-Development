@@ -1,0 +1,190 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+
+  <div class="container">
+
+    <a class="navbar-brand" ><%= image_tag("gitScrubsLogo.png", :alt => "gitScrubs", :class => "logo-nav") %></a>
+
+    <div class="d-none d-xl-block">
+      <ul>
+        <li
+        <% if controller_name == "page" && action_name == "home" %>
+        class="active"
+        <% end %>
+        >
+          <%= link_to "Home", root_path, :class=>'nav-item nav-link' %>
+        </li>
+        <!--<li-->
+        <!--<% if controller_name == "page" && action_name == "about_us" %>-->
+        <!--class="active"-->
+        <!--<% end %>-->
+        <!--&gt;-->
+
+          <!--<%= link_to "About", about_us_path, :class=>'nav-item nav-link' %>-->
+        <!--</li>-->
+        <li
+        <% if controller_name == "page" && action_name == "login" %>
+        class="active"
+        <% end %>
+        >
+          <% if user_signed_in? == false %>
+            <%= link_to "Login", new_user_session_path, :class=>'nav-item nav-link' %>
+            </li>
+          <% end %>
+
+          <li
+
+          <% if controller_name == "devise/sessions" && action_name == "destroy" %>
+          class="current"
+          <% end %>
+          >
+            <% if user_signed_in? == true %>
+              <%= link_to "Log Out", destroy_user_session_path, :class=>'nav-item nav-link', :style => "white-space: nowrap;", method: :delete %>
+              </li>
+            <% end %>
+            <li
+            <% if controller_name == "page" && action_name == "contact_us" %>
+            class="active"
+            <% end %>
+            >
+
+              <%= link_to "Contact Us", contact_us_path, :class=>'nav-item nav-link', :style => "white-space: nowrap;" %>
+            </li>
+
+            <% if current_user.try(:employee) %>
+              <li <% if controller_name == "page" && action_name == "employee_sched" %>
+                  <% end %>
+              >
+                <%= link_to "Schedule", employee_sched_path, :class=>'nav-item nav-link' %>
+              </li>
+            <% end %>
+
+            <% if current_user.try(:employee_manager) %>
+              <li <% if controller_name == "page" && action_name == "manager_sched" %>
+                  <% end %>
+              >
+                <%= link_to "Schedule", manager_sched_path, :class=>'nav-item nav-link' %>
+              </li>
+            <% end %>
+
+            <% if current_user.try(:hospital_admin) %>
+              <li <% if controller_name == "page" && action_name == "hosp_admin_sched" %>
+                  <% end %>
+              >
+                <%= link_to "Request Help", hosp_admin_sched_path, :class=>'nav-item nav-link' %>
+              </li>
+            <% end %>
+
+            <% if current_user.try(:employee) %>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:3px; margin-top: 6px">
+                Notifications
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                <% @employees.each do |employee| %>
+                    <% if (employee.employeeID == current_user.try(:id)) && employee.confirmed == false %>
+                        <%= link_to "New Notification", employee_sched_path, :class=>'nav-item nav-link' %>
+                    <%end%>
+
+                <%end%>
+              </div>
+            </div>
+            <%end%>
+
+            </ul>
+
+
+    </div>
+
+    <% if current_user.try(:employee) %>
+    <div class="dropdown d-xl-none">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:3px;">
+        Notifications
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+        <% @employees.each do |employee| %>
+            <% if (employee.employeeID == current_user.try(:id)) && employee.confirmed == false %>
+                <%= link_to "New Notification", employee_sched_path, :class=>'nav-item nav-link' %>
+            <%end%>
+
+        <%end%>
+      </div>
+    </div>
+    <%end%>
+
+    <div class="dropdown d-xl-none">
+      <a class=".btn" data-toggle="dropdown"><%= image_tag("dropDownButton.png", :alt => "drop down", :class => "dropdownbtn") %>
+
+      </a>
+      <ul class="dropdown-menu ">
+        <li
+        <% if controller_name == "page" && action_name == "home" %>
+        class="active"
+        <% end %>
+        >
+          <%= link_to "Home", root_path, :class=>'nav-item nav-link' %>
+        </li>
+        <!--<li-->
+        <!--<% if controller_name == "page" && action_name == "about_us" %>-->
+        <!--class="active"-->
+        <!--<% end %>-->
+        <!--&gt;-->
+
+          <!--<%= link_to "About", about_us_path, :class=>'nav-item nav-link' %>-->
+        <!--</li>-->
+        <li
+        <% if controller_name == "page" && action_name == "login" %>
+        class="active"
+        <% end %>
+        >
+          <% if user_signed_in? == false %>
+            <%= link_to "Login", new_user_session_path, :class=>'nav-item nav-link' %>
+            </li>
+          <% end %>
+
+          <li
+
+          <% if controller_name == "devise/sessions" && action_name == "destroy" %>
+          class="current"
+          <% end %>
+          >
+            <% if user_signed_in? == true %>
+              <%= link_to "Log Out", destroy_user_session_path, :class=>'nav-item nav-link', :style => "white-space: nowrap;", method: :delete %>
+              </li>
+            <% end %>
+            <li
+            <% if controller_name == "page" && action_name == "contact_us" %>
+            class="active"
+            <% end %>
+            >
+
+              <%= link_to "Contact Us", contact_us_path, :class=>'nav-item nav-link', :style => "white-space: nowrap;" %>
+            </li>
+
+            <% if current_user.try(:employee) %>
+              <li <% if controller_name == "page" && action_name == "employee_sched" %>
+                  <% end %>
+              >
+                <%= link_to "Schedule", employee_sched_path, :class=>'nav-item nav-link' %>
+              </li>
+            <% end %>
+
+            <% if current_user.try(:employee_manager) %>
+              <li <% if controller_name == "page" && action_name == "manager_sched" %>
+                  <% end %>
+              >
+                <%= link_to "Schedule", manager_sched_path, :class=>'nav-item nav-link' %>
+              </li>
+            <% end %>
+
+            <% if current_user.try(:hospital_admin) %>
+              <li <% if controller_name == "page" && action_name == "hosp_admin_sched" %>
+                  <% end %>
+              >
+                <%= link_to "Schedule", hosp_admin_sched_path, :class=>'nav-item nav-link' %>
+              </li>
+            <% end %>
+
+      </ul>
+    </div>
+  </div>
+</nav>

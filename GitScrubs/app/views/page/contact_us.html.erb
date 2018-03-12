@@ -1,0 +1,54 @@
+<!--<h1>Page#contact_us</h1>-->
+<!--<p>Find me in app/views/page/contact_us.html.erb</p>-->
+
+
+
+
+<div class="contact-div container-fluid" align="center">
+  <br>
+  <h3>Please fill out the form to contact us.</h3>
+
+  <%= form_tag '/contact_us', method: :get do %>
+
+    <%= label_tag 'first_name', 'Enter your first name: ' %>
+      <br>
+    <%= text_field_tag 'first_name', @first_name%>
+      <br>
+      <br>
+    <%= label_tag 'last_name', 'Enter your last name' %>
+      <br>
+    <%= text_field_tag 'last_name', @last_name %>
+      <br>
+      <br>
+    <%= label_tag 'email_address', 'Enter your email address: ' %>
+      <br>
+    <%= text_field_tag 'email_address', @email_address %>
+      <br>
+      <br>
+    <%= label_tag 'phone_number', 'Phone Number: ' %>
+      <br>
+    <%= phone_field_tag 'phone_number', @phone_number %>
+      <br>
+      <br>
+    <%= label_tag 'question', 'Please enter a question: ' %>
+      <br>
+    <%= text_area_tag 'question', @question %>
+      <br>
+      <br>
+    <%= submit_tag "Submit" %>
+      <br>
+      <br>
+  <% end %>
+</div>
+
+
+
+
+    <% if (!flash.now[:error]) == nil? %>
+      <%= "Error: #{flash.now[:error]}".html_safe %>
+
+  <% end %>
+
+
+</div>
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GitScrubs</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="body">
+
+
+
+  <!-- Navigation -->
+
+
+  <%= render :partial => 'shared/nav' %>
+
+
+  <p class="alert"><%= alert %></p>
+    <div id="wrap container-fluid" align="center">
+    <%= yield %>
+
+
+
+    </div>
+
+
+   <!-- Footer -->
+  <footer class="py-5 footer">
+
+
+    <div class="logo-name text-center">
+
+      <%= image_tag("gitScrubsName_white.png") %>
+
+    </div>
+    <div class="container">
+      <p class="m-0 text-center make_me_white">Copyright &copy; gitScrubs 2018</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  </body>
+</html>

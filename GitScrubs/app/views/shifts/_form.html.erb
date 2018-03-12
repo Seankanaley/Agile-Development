@@ -1,0 +1,112 @@
+<%= form_with(model: shift, local: true) do |form| %>
+    <% if shift.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+
+          <ul>
+            <% shift.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <% if current_user.try(:hospital_admin) %>
+        <div class="shifts-div container-fluid">
+          <div class="boxed">
+            <p>
+              <%= form.label :start_time %>
+            <p>
+              <%= form.datetime_select :start_time, id: :shift_start_time %>
+            </p>
+          </div>
+
+          <div class="boxed">
+            <p>
+              <%= form.label :end_time %>
+            </p>
+            <p>
+              <%= form.datetime_select :end_time, id: :shift_end_time %>
+            </p>
+          </div>
+
+          <div class="boxed">
+            <p class="boxed">
+              <%= form.label :location %>
+            </p>
+            <p class="make_me_white boxed location">
+              <%= form.text_field :location, id: :shift_location %>
+            </p>
+          </div>
+
+          <div class="actions">
+            <p class="btn-lg">
+              <%= form.submit %>
+            </p>
+          </div>
+    <% end %>
+    </div>
+
+
+
+    <% if current_user.try(:employee) %>
+        <div class="field">
+          <%= form.label :start_time %>
+          <%= form.text_field :start_time, id: :shift_start_time, :readonly => true %>
+        </div>
+
+        <div class="field">
+          <%= form.label :end_time %>
+          <%= form.text_field :end_time, id: :shift_end_time, :readonly => true %>
+        </div>
+
+        <div class="field">
+          <%= form.label :location %>
+          <%= form.text_field :location, id: :shift_location, :readonly => true %>
+        </div>
+
+        <div class="field">
+          <%= form.label :confirmed, 'Please Enter true or false:' %>
+          <%= form.text_field :confirmed, id: :confirmed %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+    <% end %>
+
+<% end %>
+
+<% if current_user.try(:employee_manager) %>
+  <%= form_with(model: shift, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.text_field :start_time, id: :shift_start_time, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.text_field :end_time, id: :shift_end_time, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location, id: :shift_location, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Employee %>
+    <%= form.select :employeeID, User.where(:employee => 1).pluck(:name, :id)%>
+    <!--<%= form.select(:employeeId) do %>-->
+      <!--<% User.where(employee: '1').each do |user| %>-->
+        <!--<%= content_tag(:option, "#{user.id}: #{user.name}", value: user.id) %>-->
+        <!--<option value="<%= user.id %>"><%= "#{user.id}: #{user.name}"%></option>-->
+        <!--<% end %>-->
+      <!--<% end %>-->
+
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<% end %>

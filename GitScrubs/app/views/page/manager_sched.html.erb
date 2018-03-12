@@ -1,0 +1,31 @@
+
+<h1>Manager Schedule to Update Employee Schedule</h1>
+
+<p id="notice"><%= notice %></p>
+
+
+  <table cellspacing="40px">
+    <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Location</th>
+      <th>Employee ID</th>
+      <th>Confirmed</th>
+      <th colspan="3">Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @shifts.each do |shift| %>
+    <tr>
+      <td><%= shift.start_time %></td>
+      <td><%= shift.end_time %></td>
+      <td><%= shift.location %></td>
+      <td><%= shift.employeeID %></td>
+      <td><%= shift.confirmed %></td>
+      <td> <%= link_to 'Show', edit_shift_path(shift) %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+
